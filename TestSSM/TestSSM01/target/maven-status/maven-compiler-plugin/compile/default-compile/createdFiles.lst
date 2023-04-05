@@ -1,0 +1,5 @@
+com\msb\controller\BookController.class
+com\msb\service\BookService.class
+com\msb\mapper\BookMapper.class
+com\msb\pojo\Book.class
+com\msb\service\Impl\BookServiceImpl.class
