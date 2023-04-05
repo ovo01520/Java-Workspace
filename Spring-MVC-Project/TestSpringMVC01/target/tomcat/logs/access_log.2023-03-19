@@ -1,0 +1,5 @@
+127.0.0.1 - - [19/Mar/2023:20:30:25 +0800] "GET /testspringmvc01 HTTP/1.1" 302 - http-bio-8888-exec-1 0
+127.0.0.1 - - [19/Mar/2023:20:30:25 +0800] "GET /testspringmvc01/ HTTP/1.1" 200 52 http-bio-8888-exec-2 337
+127.0.0.1 - - [19/Mar/2023:20:30:25 +0800] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8888-exec-3 0
+127.0.0.1 - - [19/Mar/2023:20:37:31 +0800] "GET /testspringmvc01/test HTTP/1.1" 200 52 http-bio-8888-exec-2 90
+127.0.0.1 - - [19/Mar/2023:20:38:52 +0800] "GET /TestSpringMVC01/test HTTP/1.1" 200 52 http-bio-8080-exec-1 75
