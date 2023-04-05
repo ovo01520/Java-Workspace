@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hsy.mapper.OrderMapper">
+    <resultMap type="orderCustomer" id="select_order_customer">
+        <id column="orderid" property="orderid"/>
+        <result column="id" property="id"/>
+        <result column="t_number" property="t_number"/>
+        <result column="createtime" property="createtime"/>
+        <result column="note" property="note"/>
+        <association property="user" javaType="user">
+            <id column="id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="birthday" property="birthday"/>
+            <result column="sex" property="sex"/>
+            <result column="address" property="address"/>
+        </association>
+    </resultMap>
+    <!-- 查询订单的详细信息，同时关联查询产生该订单的用户信息 -->
+    <select id="selectAllOrderAndCustomer" resultMap="select_order_customer">
+        select * from t_order,t_user where t_order.id = t_user.id
+    </select>
+</mapper>

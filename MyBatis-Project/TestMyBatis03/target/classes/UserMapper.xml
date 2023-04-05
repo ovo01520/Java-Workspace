@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hsy.mapper.UserMapper">
+    <resultMap type="userAndOrder" id="select_user_order">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="birthday" property="birthday"/>
+        <result column="sex" property="sex"/>
+        <result column="address" property="address"/>
+        <collection property="orders" ofType="order">
+            <id column="orderid" property="orderid"/>
+            <result column="userid" property="id"/>
+            <result column="t_number" property="t_number"/>
+            <result column="createtime" property="createtime"/>
+            <result column="note" property="note"/>
+        </collection>
+    </resultMap>
+    <!-- 查询全部的用户并且关联查询用户所产生的订单 -->
+    <select id="selectAllUserAndOrder" resultMap="select_user_order">
+        select t_user.*,orderid,t_order.id userid,t_number,createtime,note from t_user,t_order where t_user.id = t_order.id
+    </select>
+    <resultMap type="userAndItem" id="select_user_item">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="birthday" property="birthday"/>
+        <result column="sex" property="sex"/>
+        <result column="address" property="address"/>
+        <collection property="oaos" ofType="orderAndOrderdetail">
+            <id column="orderid" property="orderid"/>
+            <result column="userid" property="id"/>
+            <result column="t_number" property="t_number"/>
+            <result column="ordertime" property="createtime"/>
+            <result column="note" property="note"/>
+            <collection property="oais" ofType="orderdetailAndItem">
+                <id column="detailid" property="detailid"/>
+                <result column="oid" property="orderid"/>
+                <result column="iid" property="itemid"/>
+                <result column="item_num" property="item_num"/>
+                <association property="item" javaType="item">
+                    <id column="itemid" property="itemid"/>
+                    <result column="itemname" property="name"/>
+                    <result column="price" property="price"/>
+                    <result column="detail" property="detail"/>
+                    <result column="itemtime" property="createtime"/>
+                </association>
+            </collection>
+        </collection>
+    </resultMap>
+    <!-- 查询全部的用户并且关联查询改用的订单、订单详情以及购买的商品 -->
+    <select id="selectAllUserAndItem" resultMap="select_user_item">
+        select t_user.*,t_order.orderid orderid,t_order.id userid,t_number,t_order.createtime ordertime,note,detailid,t_orderdetail.orderid oid,t_orderdetail.itemid iid,item_num,t_item.itemid itemid,t_item.name itemname,price,detail,t_item.createtime itemtime from t_user,t_order,t_orderdetail,t_item where t_user.id = t_order.id and t_order.orderid = t_orderdetail.orderid and t_orderdetail.itemid = t_item.itemid
+    </select>
+</mapper>

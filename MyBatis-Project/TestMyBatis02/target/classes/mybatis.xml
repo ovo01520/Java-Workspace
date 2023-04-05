@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 加载数据库的参数 -->
+    <properties resource="db.properties"></properties>
+    <!-- 给com.hsy.pojo.User设置别名 -->
+    <typeAliases>
+        <package name="com.hsy.pojo"/>
+    </typeAliases>
+    <!-- 配置MyBatis的运行环境 -->
+    <environments default="development">
+        <!-- 子开发环境 -->
+        <environment id="development">
+            <!-- 指定数据库事务模式 -->
+            <transactionManager type="JDBC"></transactionManager>
+            <!-- 配置数据源 -->
+            <dataSource type="POOLED">
+                <!-- 配置数据库的驱动类的地址 -->
+                <property name="driver" value="${driver}"/>
+                <!-- 配置数据库的连接地址 -->
+                <property name="url" value="${url}"/>
+                <!-- 配置连接数据库时使用的用户名 -->
+                <property name="username" value="${username}"/>
+                <!-- 配置连接数据库时使用的密码 -->
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- 加载映射文件 -->
+    <mappers>
+        <mapper resource="UserMapper.xml"></mapper>
+    </mappers>
+</configuration>

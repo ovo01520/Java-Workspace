@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hsy.mapper.UserMapper">
+    <!-- 动态SQL标签 -->
+    <sql id="select_name_like">
+        <if test="LikeName!=null">
+            and name like #{LikeName}
+        </if>
+        <if test="LikeAddr!=null">
+            or addr like #{LikeAddr}
+        </if>
+    </sql>
+    <!-- 按照用户的姓名模糊或者地址模糊查询用户的信息 -->
+    <select id="findUsersByNameOrAddr" parameterType="userLike" resultType="user">
+        select * from user
+        <where>
+            <include refid="select_name_like"></include>
+        </where>
+    </select>
+    <!-- 按照用户的姓名模糊或者地址模糊查询用户的数量 -->
+    <select id="findUsersByCount" parameterType="userLike" resultType="int">
+        select count(*) from user
+        <where>
+            <include refid="select_name_like"></include>
+        </where>
+    </select>
+    <!-- 按照多个ID查询用户的信息 -->
+    <select id="findUserByIds" parameterType="userLike" resultType="user">
+        select * from user
+        <where>
+            <if test="ids!=null">
+                <foreach collection="ids" item="userId" open="and (" close=")" separator="or">
+                    id = #{userId}
+                </foreach>
+            </if>
+        </where>
+    </select>
+</mapper>
