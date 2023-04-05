@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+    <context:component-scan base-package="com.msb.pojo"></context:component-scan>
+    <!-- 属性注入 -->
+<!--    <bean id="boy" class="com.msb.pojo.Boy">-->
+<!--        <property name="age" value="23"></property>-->
+<!--        <property name="name" value="小刚"></property>-->
+<!--    </bean>-->
+<!--    <bean id="girl" class="com.msb.pojo.Girl">-->
+<!--        <property name="age" value="21"></property>-->
+<!--        <property name="name" value="莉莉"></property>-->
+<!--        <property name="boyFriend" ref="boy"></property>-->
+<!--    </bean>-->
+    <!-- 构造器注入 -->
+<!--    <bean id="boy" class="com.msb.pojo.Boy">-->
+<!--        <constructor-arg name="age" value="23"></constructor-arg>-->
+<!--        <constructor-arg name="name" value="小刚"></constructor-arg>-->
+<!--    </bean>-->
+<!--    <bean id="girl" class="com.msb.pojo.Girl">-->
+<!--        <constructor-arg name="age" value="21"></constructor-arg>-->
+<!--        <constructor-arg name="name" value="莉莉"></constructor-arg>-->
+<!--        <constructor-arg name="boyFriend" ref="boy"></constructor-arg>-->
+<!--    </bean>-->
+</beans>

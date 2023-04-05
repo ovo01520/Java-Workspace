@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 配置HelloWorld的Bean -->
+    <bean id="helloworld" class="com.hsy.pojo.HelloWorld">
+        <property name="name" value="张三"/>
+    </bean>
+    <!-- 配置School的Bean -->
+    <bean id="school" class="com.hsy.pojo.School">
+        <property name="name" value="哈石油"/>
+    </bean>
+    <!-- 配置Student属性 -->
+    <bean id="student" class="com.hsy.pojo.Student">
+        <property name="name" value="李四"/>
+        <property name="school" ref="school"/>
+    </bean>
+    <!-- 完成List集合的映射 -->
+    <!-- 配置Student的Bean -->
+    <bean id="stu1" class="com.hsy.pojo.Student1">
+        <property name="name" value="王五"/>
+    </bean>
+    <bean id="stu2" class="com.hsy.pojo.Student1">
+        <property name="name" value="赵六"/>
+    </bean>
+    <bean id="stu3" class="com.hsy.pojo.Student1">
+        <property name="name" value="小明"/>
+    </bean>
+    <!-- 配置Classes的Bean -->
+    <bean id="class" class="com.hsy.pojo.Classes">
+        <property name="name" value="1班"/>
+        <property name="stu">
+            <list>
+                <ref bean="stu1"/>
+                <ref bean="stu2"/>
+                <ref bean="stu3"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 完成Set集合的映射 -->
+    <!-- 配置Student的Bean -->
+    <bean id="stus1" class="com.hsy.pojo.Student1">
+        <property name="name" value="王五"/>
+    </bean>
+    <bean id="stus2" class="com.hsy.pojo.Student1">
+        <property name="name" value="赵六"/>
+    </bean>
+    <bean id="stus3" class="com.hsy.pojo.Student1">
+        <property name="name" value="小明"/>
+    </bean>
+    <!-- 配置Classes的Bean -->
+    <bean id="class1" class="com.hsy.pojo.Classes1">
+        <property name="name" value="2班"/>
+        <property name="stu">
+            <list>
+                <ref bean="stus1"/>
+                <ref bean="stus2"/>
+                <ref bean="stus3"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 完成Map集合的映射 -->
+    <!-- 配置Student的Bean -->
+    <bean id="student1" class="com.hsy.pojo.Student1">
+        <property name="name" value="王五"/>
+    </bean>
+    <bean id="student2" class="com.hsy.pojo.Student1">
+        <property name="name" value="赵六"/>
+    </bean>
+    <bean id="student3" class="com.hsy.pojo.Student1">
+        <property name="name" value="小明"/>
+    </bean>
+    <!-- 配置Classes的Bean -->
+    <bean id="class2" class="com.hsy.pojo.Classes2">
+        <property name="name" value="3班"/>
+        <property name="stu">
+            <map>
+                <entry key="AAA" value-ref="student1"/>
+                <entry key="BBB" value-ref="student2"/>
+                <entry key="CCC" value-ref="student3"/>
+            </map>
+        </property>
+    </bean>
+</beans>
