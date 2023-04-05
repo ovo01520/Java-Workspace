@@ -1,6 +1,5 @@
 package com.hsy.pojo;
 
-import java.util.List;
 import java.util.Set;
 
 /**
