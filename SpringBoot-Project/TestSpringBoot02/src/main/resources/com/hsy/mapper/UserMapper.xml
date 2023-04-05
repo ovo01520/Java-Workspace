@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hsy.mapper.UserMapper">
+    <!-- 根据用户的id查询用户的信息 -->
+    <select id="findUserById" parameterType="int" resultType="user">
+        select * from user where id = #{value}
+    </select>
+    <!-- 根据用户的姓名模糊查询用户的信息 -->
+    <select id="findUsersByName" parameterType="string" resultType="user">
+        select * from user where name like #{value}
+    </select>
+    <!-- 插入用户信息 -->
+    <insert id="insertUser" parameterType="user">
+        insert into user values(#{id},#{name},#{birthday},#{addr})
+    </insert>
+    <!-- 更新用户信息 -->
+    <update id="updateUser" parameterType="user">
+        update user set name = #{name},birthday = #{birthday},addr = #{addr} where id = #{id}
+    </update>
+    <!-- 删除用户信息 -->
+    <delete id="deleteUser" parameterType="int">
+        delete from user where id = #{value}
+    </delete>
+    <!-- 定义一个SQL片段 -->
+    <sql id="select_userOr_sql">
+        <if test="LikeName!=null">
+            and name like #{LikeName}
+        </if>
+        <if test="LikeAddr!=null">
+            or addr like #{LikeAddr}
+        </if>
+    </sql>
+    <!-- 按照用户的姓名模糊或者地址模糊查询用户的信息 -->
+    <select id="findUserByNameOrAddrLike" parameterType="userLike" resultType="user">
+        select * from user
+        <where>
+            <!-- 引入SQL片段 -->
+            <include refid="select_userOr_sql"></include>
+        </where>
+    </select>
+    <!-- 按照用户的姓名模糊或者地址模糊查询用户的数量 -->
+    <select id="findUserByCount" parameterType="userLike" resultType="int">
+        select count(*) from user
+        <where>
+            <!-- 引入SQL片段 -->
+            <include refid="select_userOr_sql"></include>
+        </where>
+    </select>
+    <!-- 按照多个ID查询用户的信息 -->
+    <select id="findUserByIds" parameterType="userLike" resultType="user">
+        select * from user
+        <where>
+            <foreach collection="ids" item="findId" open="and (" close=")" separator="or">
+                id = #{findId}
+            </foreach>
+        </where>
+    </select>
+</mapper>
